@@ -109,5 +109,4 @@ class JsonRpcStreamWriter(object):
                 self._wfile.write(response.encode('utf-8'))
                 self._wfile.flush()
             except Exception:  # pylint: disable=broad-except
-
                 log.exception("Failed to write message to output file %s", message)

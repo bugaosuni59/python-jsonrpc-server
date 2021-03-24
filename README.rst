@@ -1,4 +1,9 @@
-Python JSON RPC Server
+This project is customized to send messages to SQL Tools Services
+======================
+
+
+
+Python JSON RPC Server 
 ======================
 
 .. image:: https://circleci.com/gh/palantir/python-jsonrpc-server/tree/develop.svg?style=shield
