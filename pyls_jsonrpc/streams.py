@@ -95,18 +95,19 @@ class JsonRpcStreamWriter(object):
             if self._wfile.closed:
                 return
             try:
-                body = json.dumps(message, **self._json_dumps_args)
+                body = message if isinstance(message,str) else json.dumps(message, **self._json_dumps_args)
 
                 # Ensure we get the byte length, not the character length
                 content_length = len(body) if isinstance(body, bytes) else len(body.encode('utf-8'))
 
                 response = (
-                    "Content-Length: {}\r\n"
-                    "Content-Type: application/vscode-jsonrpc; charset=utf8\r\n\r\n"
+                    "Content-Length: {}\r\n\r\n"
+                    # "Content-Type: application/vscode-jsonrpc; charset=utf8\r\n\r\n"
                     "{}".format(content_length, body)
                 )
 
                 self._wfile.write(response.encode('utf-8'))
                 self._wfile.flush()
             except Exception:  # pylint: disable=broad-except
+
                 log.exception("Failed to write message to output file %s", message)
